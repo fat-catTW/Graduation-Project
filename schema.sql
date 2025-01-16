@@ -98,3 +98,49 @@ CREATE INDEX idx_interactions_session ON InteractionDetails(session_id);
 CREATE INDEX idx_leaderboard_user ON LeaderboardRecords(user_id);
 CREATE INDEX idx_lottery_user ON LotteryTickets(user_id);
 CREATE INDEX idx_notifications_user ON Notifications(user_id);
+
+-- 修改互動詳情表
+ALTER TABLE InteractionDetails 
+ADD COLUMN interaction_depth ENUM('BASIC', 'INTERMEDIATE', 'ADVANCED') NOT NULL DEFAULT 'BASIC',
+ADD COLUMN learning_mode ENUM('ONE_TO_ONE', 'ONE_TO_MANY') NOT NULL,
+ADD COLUMN expected_answer_complexity ENUM('SIMPLE', 'DETAILED', 'COMPREHENSIVE') NOT NULL DEFAULT 'SIMPLE',
+ADD COLUMN user_question TEXT,
+ADD COLUMN user_answer TEXT,
+ADD COLUMN ai_feedback TEXT,
+ADD COLUMN correctness_level ENUM('CORRECT', 'PARTIALLY_CORRECT', 'INCORRECT'),
+ADD COLUMN points_earned INT DEFAULT 0,
+ADD COLUMN knowledge_point_id INT;
+
+-- 創建學習材料表
+CREATE TABLE LearningMaterials (
+    material_id INT PRIMARY KEY AUTO_INCREMENT,
+    material_type ENUM('PPT', 'PDF', 'DOCX', 'OTHER') NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    material_name VARCHAR(255) NOT NULL,
+    uploaded_by INT,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    material_metadata JSON DEFAULT (JSON_OBJECT()),
+    FOREIGN KEY (uploaded_by) REFERENCES Users(user_id) ON DELETE SET NULL
+);
+
+-- 創建知識點表
+CREATE TABLE MaterialKnowledgePoints (
+    knowledge_point_id INT PRIMARY KEY AUTO_INCREMENT,
+    material_id INT NOT NULL,
+    point_order INT NOT NULL,
+    point_title VARCHAR(255) NOT NULL,
+    point_description TEXT,
+    difficulty_level ENUM('BASIC', 'INTERMEDIATE', 'ADVANCED') DEFAULT 'BASIC',
+    knowledge_point_metadata JSON DEFAULT (JSON_OBJECT()),
+    FOREIGN KEY (material_id) REFERENCES LearningMaterials(material_id) ON DELETE CASCADE
+);
+
+-- 為 InteractionDetails 添加外鍵
+ALTER TABLE InteractionDetails 
+ADD CONSTRAINT fk_interaction_knowledge_point 
+FOREIGN KEY (knowledge_point_id) 
+REFERENCES MaterialKnowledgePoints(knowledge_point_id);
+
+-- 修改索引
+CREATE INDEX idx_learning_materials_uploaded_by ON LearningMaterials(uploaded_by);
+CREATE INDEX idx_knowledge_points_material ON MaterialKnowledgePoints(material_id);
