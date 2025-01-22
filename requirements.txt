@@ -1,0 +1,4 @@
+flask==3.1.0
+mysql-connector-python==9.1.0
+python-dotenv==1.0.1  # 管理環境變數
+requests==2.31.0 # 如果你需要在 Flask 內部發送 HTTP 請求
