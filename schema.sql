@@ -147,3 +147,7 @@ CREATE INDEX idx_knowledge_points_material ON MaterialKnowledgePoints(material_i
 
 -- 修改Users表
 ALTER TABLE Users ADD COLUMN password VARCHAR(255) NOT NULL;
+
+-- 刪除device_metadata欄位
+ALTER TABLE Users DROP COLUMN device_metadata;
+
