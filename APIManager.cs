@@ -1,53 +1,111 @@
 using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections;
+using UnityEngine.Networking;
 
 public class APIManager : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000";  // Flask 伺服器位址
+    [Header("註冊 UI 元件")]
+    public TMP_InputField registerUsernameInput;
+    public TMP_InputField registerEmailInput;
+    public TMP_InputField registerPasswordInput;
+    public Button registerButton;
 
-    // 單例模式（確保只有一個API管理器實例）
-    public static APIManager Instance { get; private set; }
+    [Header("登入 UI 元件")]
+    public TMP_InputField loginEmailInput;
+    public TMP_InputField loginPasswordInput;
+    public Button loginButton;
 
-    private void Awake()
+    [Header("頁面 Panel")]
+    public GameObject SigninPanel;   // 註冊頁
+    public GameObject LoginPanel;    // 登入頁
+    public GameObject HomePagePanel; // 主頁 (登入成功後顯示)
+
+    private string baseUrl = "http://127.0.0.1:8000";  // Flask 伺服器運行中
+
+    void Start()
     {
-        if (Instance == null)
+        registerButton.onClick.AddListener(() => StartCoroutine(RegisterUser()));
+        loginButton.onClick.AddListener(() => StartCoroutine(LoginUser()));
+
+        // 確保進入遊戲時只顯示登入/註冊頁面
+        SigninPanel.SetActive(true);
+        LoginPanel.SetActive(false);
+        HomePagePanel.SetActive(false);
+    }
+
+    IEnumerator RegisterUser()
+    {
+        string username = registerUsernameInput.text;
+        string email = registerEmailInput.text;
+        string password = registerPasswordInput.text;
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);  // 確保在場景切換時不會被銷毀
+            Debug.LogError("所有欄位皆需填寫");
+            yield break;
         }
-        else
+
+        string jsonData = $"{{\"username\": \"{username}\", \"email\": \"{email}\", \"password\": \"{password}\"}}";
+
+        using (UnityWebRequest request = new UnityWebRequest(baseUrl + "/register", "POST"))
         {
-            Destroy(gameObject);
-        }
-    }
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
 
-    private void Start()
-    {
-        // 場景加載後立即請求用戶資料
-        GetUserData(1);  // 這裡的 1 可以替換為你想要的用戶 ID
-    }
-
-    // 取得用戶資料的函式
-    public void GetUserData(int userId)
-    {
-        StartCoroutine(GetUserRequest(userId));
-    }
-
-    IEnumerator GetUserRequest(int userId)
-    {
-        string url = $"{baseUrl}/get_user/{userId}";  // 組合 API URL
-        using (UnityWebRequest request = UnityWebRequest.Get(url))
-        {
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("成功取得用戶資料：" + request.downloadHandler.text);
+                Debug.Log("註冊成功！跳轉到登入頁");
+
+                // **隱藏註冊頁，顯示登入頁**
+                SigninPanel.SetActive(false);
+                LoginPanel.SetActive(true);
             }
             else
             {
-                Debug.LogError("請求失敗：" + request.error);
+                Debug.LogError("註冊失敗：" + request.downloadHandler.text);
+            }
+        }
+    }
+
+    IEnumerator LoginUser()
+    {
+        string email = loginEmailInput.text;
+        string password = loginPasswordInput.text;
+
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        {
+            Debug.LogError("所有欄位皆需填寫");
+            yield break;
+        }
+
+        string jsonData = $"{{\"email\": \"{email}\", \"password\": \"{password}\"}}";
+
+        using (UnityWebRequest request = new UnityWebRequest(baseUrl + "/login", "POST"))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("登入成功！跳轉到主頁");
+
+                // **隱藏登入頁，顯示主頁**
+                LoginPanel.SetActive(false);
+                HomePagePanel.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("登入失敗：" + request.downloadHandler.text);
             }
         }
     }
