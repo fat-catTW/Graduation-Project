@@ -13,7 +13,7 @@ app.py設定好後 要先到終端機重新啟動虛擬環境 當關閉終端機
 在啟動app.py後，需查看 http://127.0.0.1:8000/ 若顯示「Flask 伺服器運行中!」表Flask成功連接資料庫
 
 Unity連Flask:
-先在全域創建一個空物件叫做：APIManager
+先在全域創建一個空物件叫做：APIManager，層級與Canvas相同
 在Unity裡create Sript 寫APIManager.cs 管理與Flask連接 註冊與登入（目前登入還沒做完）
 需注意!! 元件名稱很重要 
 [Header("註冊 UI 元件")]
