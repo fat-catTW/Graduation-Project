@@ -1,0 +1,36 @@
+2/18 串接資料庫，實作註冊登入
+Unity 串接 MySQL 中間需要用到Flask API
+
+Flask連資料庫：
+首先需要在Weishinru底下建立一個app.py處理Flask與資料庫的連線
+本來打算把註冊登入拆出來寫 但寫不出來 不過寫不出來的Flask檔案有保留
+
+app.py設定好後 要先到終端機重新啟動虛擬環境 當關閉終端機或重啟電腦時 Python 虛擬環境 (venv) 會自動關閉
+因此每次都需要執行以下命令來重新啟動虛擬環境： source myproject-env/bin/activate
+開好後，要啟動app.py 請在終端機輸入：python app.py
+而後要主動關閉虛擬環境：deactivate
+
+在啟動app.py後，需查看 http://127.0.0.1:8000/ 若顯示「Flask 伺服器運行中!」表Flask成功連接資料庫
+
+Unity連Flask:
+先在全域創建一個空物件叫做：APIManager
+在Unity裡create Sript 寫APIManager.cs 管理與Flask連接 註冊與登入（目前登入還沒做完）
+需注意!! 元件名稱很重要 
+[Header("註冊 UI 元件")]
+    public TMP_InputField registerUsernameInput;
+    public TMP_InputField registerEmailInput;
+    public TMP_InputField registerPasswordInput;
+    public Button registerButton;
+
+    [Header("登入 UI 元件")]
+    public TMP_InputField loginEmailInput;
+    public TMP_InputField loginPasswordInput;
+    public Button loginButton;
+
+    [Header("頁面 Panel")]
+    public GameObject SigninPanel;   // 註冊頁
+    public GameObject LoginPanel;    // 登入頁
+    public GameObject HomePagePanel; // 主頁 (登入成功後顯示)
+
+以上為所有元件應叫名稱 請確保相符 並將這些元件 拉進 APIManager的Inspector對應的框框裡面
+另外，注意！！註冊與登入的On click()互動需要刪除 交互會寫在APIManager裡，不過目前還沒有測試能否交互成功
