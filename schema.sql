@@ -144,3 +144,6 @@ REFERENCES MaterialKnowledgePoints(knowledge_point_id);
 -- 修改索引
 CREATE INDEX idx_learning_materials_uploaded_by ON LearningMaterials(uploaded_by);
 CREATE INDEX idx_knowledge_points_material ON MaterialKnowledgePoints(material_id);
+
+-- 修改Users表
+ALTER TABLE Users ADD COLUMN password VARCHAR(255) NOT NULL;
