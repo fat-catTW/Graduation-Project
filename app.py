@@ -26,7 +26,7 @@ def get_db_connection():
 def index():
     return "Flask 伺服器運行中!"
 
-# 註冊 API
+# **修正：註冊 API**
 @app.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -43,25 +43,30 @@ def register():
 
     cursor = conn.cursor()
 
-    # 檢查 Email 是否已存在
+    # **檢查 Username 是否已存在**
+    cursor.execute("SELECT * FROM Users WHERE username = %s", (username,))
+    if cursor.fetchone():
+        return jsonify({"error": "該使用者名稱已被使用"}), 400  # 🚀 防止 `username` 重複
+
+    # **檢查 Email 是否已存在**
     cursor.execute("SELECT * FROM Users WHERE email = %s", (email,))
     if cursor.fetchone():
-        return jsonify({"error": "該 Email 已被註冊"}), 400
+        return jsonify({"error": "該 Email 已被註冊"}), 400  # 🚀 防止 `email` 重複
 
     # 加密密碼
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    # 插入新用戶，確保 total_learning_points 預設為 0，account_created_at 使用 NOW()
-    query = """INSERT INTO Users (username, email, password, total_learning_points, account_created_at, diamonds, coins) 
-               VALUES (%s, %s, %s, %s, NOW(), %s, %s)"""
-    cursor.execute(query, (username, email, hashed_password.decode('utf-8'), 0))
+    # 插入新用戶，確保 `total_learning_points`、`coins` 和 `diamonds` 預設為 0
+    query = """INSERT INTO Users (username, email, password, total_learning_points, coins, diamonds, account_created_at) 
+               VALUES (%s, %s, %s, %s, %s, %s, NOW())"""
+    cursor.execute(query, (username, email, hashed_password.decode('utf-8'), 0, 0, 0))
     conn.commit()
 
     cursor.close()
     conn.close()
     return jsonify({"message": "註冊成功"}), 201
 
-# 登入 API
+# **登入 API**
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -91,9 +96,9 @@ def login():
         "user_id": user["user_id"],
         "username": user["username"],
         "total_learning_points": user["total_learning_points"],
-        "account_created_at": user["account_created_at"],
-        "dismonds": users["diamonds"], #傳回鑽石數量
-        "coins": user["coins"] #傳回金幣數量
+        "coins": user["coins"],
+        "diamonds": user["diamonds"],
+        "account_created_at": user["account_created_at"]
     }), 200
 
 if __name__ == '__main__':
