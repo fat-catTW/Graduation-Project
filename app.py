@@ -52,8 +52,8 @@ def register():
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
     # 插入新用戶，確保 total_learning_points 預設為 0，account_created_at 使用 NOW()
-    query = """INSERT INTO Users (username, email, password, total_learning_points, account_created_at) 
-               VALUES (%s, %s, %s, %s, NOW())"""
+    query = """INSERT INTO Users (username, email, password, total_learning_points, account_created_at, diamonds, coins) 
+               VALUES (%s, %s, %s, %s, NOW(), %s, %s)"""
     cursor.execute(query, (username, email, hashed_password.decode('utf-8'), 0))
     conn.commit()
 
@@ -91,7 +91,9 @@ def login():
         "user_id": user["user_id"],
         "username": user["username"],
         "total_learning_points": user["total_learning_points"],
-        "account_created_at": user["account_created_at"]
+        "account_created_at": user["account_created_at"],
+        "dismonds": users["diamonds"], #傳回鑽石數量
+        "coins": user["coins"] #傳回金幣數量
     }), 200
 
 if __name__ == '__main__':
