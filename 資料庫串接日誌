@@ -47,4 +47,25 @@ if __name__ == '__main__':
 📌 這種方式適合開發測試，但 Flask 開發模式 (debug=True) 在正式環境不安全。
 可再考慮部署到雲端，但很多要付費，後面太閒的話可以部署。
 
-1111
+2/20 我成功將資料庫與Flask API部署到了雲端
+
+MySQL我放到了railway上面 railway.com
+資料庫我放到了 dashboard.render.com 
+我的Flask API是 https://feyndora-api.onrender.com
+
+2/20 我把資料庫成功弄到雲端了，Flask API也上去雲端了!
+
+MySQL是弄到railway裡面 railway.com
+Flask API弄到了render裡面 dashboard.render.com裡面
+我的Flask API的雲端網址是: https://feyndora-api.onrender.com
+
+然後雲端的MySQL我也成功連到Azure Studio Code這裡 方便我用寫Code的方式新增資料表
+
+MySQL Public URL: mysql://root:iltFdQcGSTrQoiYsydTrUnBAWqMpSBIV@yamanote.proxy.rlwy.net:54767/railway
+記得connect資料庫的資訊是
+欄位	對應值
+Server Name（主機）	yamanote.proxy.rlwy.net
+Port（端口）	54767
+User Name（使用者）	root
+Password（密碼）	iltFdQcGSTrQoiYsydTrUnBAWqMpSBIV
+Database Name（資料庫）	railway
