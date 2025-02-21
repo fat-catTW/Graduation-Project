@@ -27,8 +27,8 @@ public class APIManager : MonoBehaviour
     public GameObject SigninPanel;
     public GameObject LoginPanel;
     public GameObject HomePagePanel;
-    public GameObject ProfilePagePanel;  // 個人檔案頁面
-    public GameObject SettingPagePanel; // 設定頁面
+    public GameObject ProfilePanel;  // 個人檔案頁面
+    public GameObject SettingsPanel; // 設定頁面
 
     [Header("主頁 UI")]
     public TMP_Text welcomeText;
