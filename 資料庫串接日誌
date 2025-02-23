@@ -69,3 +69,20 @@ Port（端口）	54767
 User Name（使用者）	root
 Password（密碼）	iltFdQcGSTrQoiYsydTrUnBAWqMpSBIV
 Database Name（資料庫）	railway
+
+2/23 成功在主頁顯示課程
+更新了app.py APIManager.cs CourseManager.cs
+✅課程預製體顯示
+✅可以搜尋課程
+✅可以刪除課程
+✅可以按更新 更新課程
+不過，收藏課程還沒製作完成，但程式碼有先寫好
+
+需要注意：
+1.要在主頁加入CourseManager，然後放入CourseManager.cs
+2.要把RecordModule變成prefab
+3.要改裡面的名稱
+4.要弄一個slider叫做progressBar
+5.裡面的細項、起始點、終點要注意
+6.前面圖片顯示要記得改為Sprite、single
+7.原圖片選白色，才不會擋住動態生成圖片
