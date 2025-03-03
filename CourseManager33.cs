@@ -117,25 +117,17 @@ public class CourseManager : MonoBehaviour
             Slider progressBar = recordButton.Find("ProgressBar")?.GetComponent<Slider>();
             TMP_Text progressText = recordButton.Find("ProgressNum")?.GetComponent<TMP_Text>();
 
+            // 設定進度條與進度數字，使用 FloorToInt 來取得整數
             if (progressBar != null)
             {
-                float p = course.progress;
-                // 如果進度不到100，但超過99.9，就限制為99.9
-                if (p < 100f && p > 99.9f)
-                {
-                    p = 99.9f;
-                }
-                progressBar.value = p / 100f;
+                int displayedProgress = (course.progress < 100f) ? Mathf.FloorToInt(course.progress) : 100;
+                progressBar.value = displayedProgress / 100f;
             }
 
             if (progressText != null)
             {
-                float p = course.progress;
-                if (p < 100f && p > 99.9f)
-                {
-                    p = 99.9f;
-                }
-                progressText.text = p.ToString("0.0") + "%";
+                int displayedProgress = (course.progress < 100f) ? Mathf.FloorToInt(course.progress) : 100;
+                progressText.text = displayedProgress.ToString() + "%";
             }
 
             // **🎨 設置對應的課程圖標**
