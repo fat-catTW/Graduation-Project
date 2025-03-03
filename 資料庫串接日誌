@@ -86,3 +86,7 @@ Database Name（資料庫）	railway
 5.裡面的細項、起始點、終點要注意
 6.前面圖片顯示要記得改為Sprite、single
 7.原圖片選白色，才不會擋住動態生成圖片
+
+3/3 補紀錄改頭像
+要改的有SettingsManager.cs AvatarManager.cs APIManager.cs 這些都要改
+記得有把紫色圈圈還有勾勾弄成一個 SelectionIndicator
