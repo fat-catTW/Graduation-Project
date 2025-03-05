@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ToggleButtonColor : MonoBehaviour
 {
@@ -8,14 +9,17 @@ public class ToggleButtonColor : MonoBehaviour
     public Button monthButton; // 月按鈕
 
     [Header("顏色設定")]
-    public Color activeColor = new Color(0.5f, 0, 0.5f); // 紫色（啟用狀態）
-    public Color inactiveColor = Color.white;           // 白色（非啟用狀態）
+    public Color activeButtonColor = new Color(0.5f, 0, 0.5f); // 紫色，啟用狀態
+    public Color inactiveButtonColor = Color.white;           // 白色，非啟用狀態
+
+    public Color activeTextColor = Color.white;   // 啟用狀態文字顏色
+    public Color inactiveTextColor = Color.black;   // 非啟用狀態文字顏色
 
     private void Start()
     {
-        // 初始狀態：日為啟用（紫色），月為非啟用（白色）
-        SetButtonColors(dayButton, activeColor);
-        SetButtonColors(monthButton, inactiveColor);
+        // 初始狀態：日按鈕為啟用，月按鈕為非啟用
+        SetButtonAndTextColors(dayButton, activeButtonColor, activeTextColor);
+        SetButtonAndTextColors(monthButton, inactiveButtonColor, inactiveTextColor);
 
         // 為按鈕設定點擊事件
         dayButton.onClick.AddListener(OnDayButtonClicked);
@@ -24,28 +28,34 @@ public class ToggleButtonColor : MonoBehaviour
 
     void OnDayButtonClicked()
     {
-        // 當點擊「日」按鈕時，將日設為啟用，月設為非啟用
-        SetButtonColors(dayButton, activeColor);
-        SetButtonColors(monthButton, inactiveColor);
-        // 如有其他切換邏輯，可在這裡加入
+        SetButtonAndTextColors(dayButton, activeButtonColor, activeTextColor);
+        SetButtonAndTextColors(monthButton, inactiveButtonColor, inactiveTextColor);
+        // 其他切換邏輯在這裡處理…
     }
 
     void OnMonthButtonClicked()
     {
-        // 當點擊「月」按鈕時，將月設為啟用，日設為非啟用
-        SetButtonColors(monthButton, activeColor);
-        SetButtonColors(dayButton, inactiveColor);
-        // 如有其他切換邏輯，可在這裡加入
+        SetButtonAndTextColors(monthButton, activeButtonColor, activeTextColor);
+        SetButtonAndTextColors(dayButton, inactiveButtonColor, inactiveTextColor);
+        // 其他切換邏輯在這裡處理…
     }
 
-    // 設定按鈕的 ColorBlock
-    void SetButtonColors(Button button, Color color)
+    // 此方法同時更新按鈕的顏色和其子物件中的TMP_Text顏色
+    void SetButtonAndTextColors(Button button, Color buttonColor, Color textColor)
     {
+        // 更新按鈕背景顏色 (ColorBlock)
         ColorBlock colors = button.colors;
-        colors.normalColor = color;
-        colors.highlightedColor = color;
-        colors.pressedColor = color * 0.9f;  // 略深一點，表示按下狀態
-        colors.selectedColor = color;
+        colors.normalColor = buttonColor;
+        colors.highlightedColor = buttonColor;
+        colors.pressedColor = buttonColor * 0.9f; // 略暗表示按下狀態
+        colors.selectedColor = buttonColor;
         button.colors = colors;
+
+        // 找到按鈕中的TMP_Text並更新文字顏色
+        TMP_Text textComponent = button.GetComponentInChildren<TMP_Text>();
+        if (textComponent != null)
+        {
+            textComponent.color = textColor;
+        }
     }
 }
