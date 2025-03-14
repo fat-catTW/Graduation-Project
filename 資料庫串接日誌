@@ -90,3 +90,10 @@ Database Name（資料庫）	railway
 3/3 補紀錄改頭像
 要改的有SettingsManager.cs AvatarManager.cs APIManager.cs 這些都要改
 記得有把紫色圈圈還有勾勾弄成一個 SelectionIndicator
+
+3/14 個人頁奮鬥
+個人頁功能真的要殺死我了
+不知是誰設計的 發瘋！
+總而言之 要改APIManager.cs 還有AchievementManager.cs
+要注意 成就的層級 還有領取獎勵的按鈕要注意OnClick()
+還有注意有沒有名稱的問題 現在就差任務了 加油！雖然之後還有教師卡片的部分....
