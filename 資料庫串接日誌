@@ -47,12 +47,6 @@ if __name__ == '__main__':
 📌 這種方式適合開發測試，但 Flask 開發模式 (debug=True) 在正式環境不安全。
 可再考慮部署到雲端，但很多要付費，後面太閒的話可以部署。
 
-2/20 我成功將資料庫與Flask API部署到了雲端
-
-MySQL我放到了railway上面 railway.com
-資料庫我放到了 dashboard.render.com 
-我的Flask API是 https://feyndora-api.onrender.com
-
 2/20 我把資料庫成功弄到雲端了，Flask API也上去雲端了!
 
 MySQL是弄到railway裡面 railway.com
@@ -95,5 +89,11 @@ Database Name（資料庫）	railway
 個人頁功能真的要殺死我了
 不知是誰設計的 發瘋！
 總而言之 要改APIManager.cs 還有AchievementManager.cs
-要注意 成就的層級 還有領取獎勵的按鈕要注意OnClick()
+要注意 成就的層級 還有領取獎勵的按鈕要注意OnClick() 選 .SetActive
 還有注意有沒有名稱的問題 現在就差任務了 加油！雖然之後還有教師卡片的部分....
+
+3/15 任務頁完成了 等待下週一測試
+這次又改了APIManager.cs 還有WeeklyTaskManager.cs
+首先要記得把progressbar從之前的prefab複製過來 因為要是slider
+還有要注意總共有6個任務按鈕 記得設定OnClick 選WeeklyTaskManager 然後方法選 ClaimTaskReward 數字分別為 0 1 2
+然後放全域就可以了
