@@ -97,8 +97,12 @@ Database Name（資料庫）	railway
 首先要記得把progressbar從之前的prefab複製過來 因為要是slider
 還有要注意總共有6個任務按鈕 記得設定OnClick 選WeeklyTaskManager 然後方法選 ClaimTaskReward 數字分別為 0 1 2
 然後放全域就可以了
-
+ 
 3/18 任務頁測試的還行 簽到頁再等一個下週測試吧 理論上可行
 最重要的是我完成課程頁了 我好棒 花了兩天時間 好累
 主要是我都還要再重做一次 然後我現在APIManager要合併兩個版本 很怕出問題
 現在又多了新的程式碼 有PresetCoursesManager.cs CourseData.cs APIManager一樣要改... 然後還有別忘記DragMove.cs也要改
+可能還會需要調Content 還要把收藏區的課程變成prefab 注意裡面圖片、類別的命名 記得讓推薦區的課程Add Component 把Coursedata加進去
+很重要收藏區的prefab也要加CourseData.cs 但裡面不用填東西 然後go button的Onclick 要先把prefab本身加進去 然後選擇 CourseData.OpenCourseDetail 喔對了 toggle的部分要反邏輯
+CoursePage_1 CoursePage_2 CoursePage_3 要改名沒錯 然後BackButton 要綁PresetCoursesManager 方法要綁 ReturnToCourseList
+喔還有PresetCoursesManager要放全域
