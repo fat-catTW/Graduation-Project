@@ -97,3 +97,8 @@ Database Name（資料庫）	railway
 首先要記得把progressbar從之前的prefab複製過來 因為要是slider
 還有要注意總共有6個任務按鈕 記得設定OnClick 選WeeklyTaskManager 然後方法選 ClaimTaskReward 數字分別為 0 1 2
 然後放全域就可以了
+
+3/18 任務頁測試的還行 簽到頁再等一個下週測試吧 理論上可行
+最重要的是我完成課程頁了 我好棒 花了兩天時間 好累
+主要是我都還要再重做一次 然後我現在APIManager要合併兩個版本 很怕出問題
+現在又多了新的程式碼 有PresetCoursesManager.cs CourseData.cs APIManager一樣要改... 然後還有別忘記DragMove.cs也要改
