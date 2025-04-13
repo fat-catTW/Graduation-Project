@@ -222,27 +222,39 @@ public class chatWithProfessor : MonoBehaviour
     {
         if(progress <= childCount)
         {
-            Debug.Log("Change Color Progress " + progress);
-            Image image = childObjects[progress - 1].GetComponent<Image>();
-            image.color = new Color(0.5f, 0.8f, 0.2f, 1f);
-            sendProgressUpdate(CurrentCourseId, "one_to_one", progress);
+            Debug.Log("Change Progress to " + progress);
+             // 取得目錄物件
+            GameObject chapterItem = childObjects[progress - 1];
+
+            // 找到子物件中的 Image（例如打勾圖案）
+            Transform imageTransform = chapterItem.transform.Find("Image");
+            if (imageTransform != null)
+            {
+                imageTransform.gameObject.SetActive(true);  // 顯示 Image
+            }
+            else
+            {
+                Debug.LogWarning("找不到 Image 物件！");
+            }
+
+            StartCoroutine(sendProgressUpdate(CurrentCourseId, "one_to_one", progress));
         }
     }
 
     IEnumerator sendProgressUpdate(int courseId, string chapterType, int orderIndex)
     {
 
-        var payload = new
+        Debug.Log("Updating Progress to DB...");
+        string jsonData = JsonUtility.ToJson(new updateProgressInDB
         {
             action = "update_chapter_progress",
             course_id = courseId,
             chapter_type = chapterType,
             order_index = orderIndex
-        };
-        string json = JsonUtility.ToJson(payload);
+        });
 
         UnityWebRequest request = new UnityWebRequest(apiUdateProgressUrl, "POST");
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -309,7 +321,13 @@ public class responseJson
     public string reply;
 }
 
-
-
+[System.Serializable]
+public class updateProgressInDB
+{
+    public string action;
+    public int course_id;
+    public string chapter_type;
+    public int order_index;
+}
 
 
