@@ -65,12 +65,11 @@ public class Chat : MonoBehaviour
         newMessage.GetComponent<Message>().MessageText.text = message;
         StartCoroutine(SendMessageToChatGPT($@"現在請完全遵守Instruction進行 Phrase1
         這是使用者的回答{message}"));
-
     }
 
     public IEnumerator SendMessageToChatGPT(string message)
     {
-        
+
         string jsonData = JsonUtility.ToJson(new messageRequest
         {
             action = "message",
@@ -79,27 +78,27 @@ public class Chat : MonoBehaviour
             thread_id = threadID
         });
 
-        
+
         using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
         {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData); 
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw); 
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
-           
+
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                
+
                 var response = JsonUtility.FromJson<messageResponse>(request.downloadHandler.text);
                 GameObject newMessage = Instantiate(feyndoraMessagePrefab, Content.transform);// ��ܦ^��
                 newMessage.GetComponent<Message>().MessageText.text = response.message;
             }
             else
             {
-               
+
                 GameObject newMessage = Instantiate(feyndoraMessagePrefab, Content.transform);// ��ܦ^��
                 newMessage.GetComponent<Message>().MessageText.text = "Error: " + request.error;
             }
@@ -108,7 +107,7 @@ public class Chat : MonoBehaviour
 
     public IEnumerator GenerateContent(string message)
     {
-        
+
         string jsonData = JsonUtility.ToJson(new messageRequest
         {
             action = "message",
@@ -117,17 +116,17 @@ public class Chat : MonoBehaviour
             thread_id = threadID
         });
 
-    
+
         using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
         {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData); 
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
             yield return request.SendWebRequest();
 
-            
+
 
             if (request.result == UnityWebRequest.Result.Success)
             {
@@ -137,7 +136,7 @@ public class Chat : MonoBehaviour
                 Debug.Log(jsonString);
                 TableOfContents ToC = JsonUtility.FromJson<TableOfContents>(jsonString);
 
-                
+
 
                 foreach (Chapter chapter in ToC.chapters)
                 {
@@ -146,7 +145,7 @@ public class Chat : MonoBehaviour
                     newTab1.GetComponent<NewTap>().TabText.text = chapter.title;
                 }
 
-                
+
                 StartCoroutine(ToCToDB(ToC));
             }
             else
@@ -160,7 +159,7 @@ public class Chat : MonoBehaviour
     {
         ToC.action = "upload_ToC";
 
-        
+
         string jsonData = JsonUtility.ToJson(ToC);
         string modifiedJson = "{\"course_id\":" + course_id + "," + jsonData.Substring(1);
 
@@ -185,7 +184,7 @@ public class Chat : MonoBehaviour
                 Debug.LogError("目錄上傳失敗: " + request.error);
             }
         }
-        
+
     }
 
     string CleanJsonString(string jsonString)
