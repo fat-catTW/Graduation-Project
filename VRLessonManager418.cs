@@ -229,27 +229,26 @@ public class VRLessonManager : MonoBehaviour
         // 計算文字所需的高度
         float textHeight = reviewText.preferredHeight;
         
-        // 獲取 Image 的 RectTransform
+        // 獲取 Image 和 PartTwo 的 RectTransform
         RectTransform imageRect = reviewText.transform.parent.GetComponent<RectTransform>();
-        // 獲取 PartTwo 的 RectTransform
         RectTransform partTwoRect = imageRect.transform.parent.GetComponent<RectTransform>();
 
         if (imageRect != null && partTwoRect != null)
         {
-            // 設置 Image 的錨點，讓它能夠往下延伸
-            imageRect.anchorMin = new Vector2(0.5f, 1);
-            imageRect.anchorMax = new Vector2(0.5f, 1);
-            imageRect.pivot = new Vector2(0.5f, 1);
+            // 保存原始的水平位置和大小
+            float originalImageX = imageRect.anchoredPosition.x;
+            float originalPartTwoX = partTwoRect.anchoredPosition.x;
+            float originalImageWidth = imageRect.sizeDelta.x;
+            float originalPartTwoWidth = partTwoRect.sizeDelta.x;
             
-            // 設置 PartTwo 的錨點
-            partTwoRect.anchorMin = new Vector2(0.5f, 1);
-            partTwoRect.anchorMax = new Vector2(0.5f, 1);
-            partTwoRect.pivot = new Vector2(0.5f, 1);
-            
-            // 設置 Image 和 PartTwo 的高度，加上一些邊距
+            // 設置高度
             float newHeight = textHeight + 40f;
-            imageRect.sizeDelta = new Vector2(imageRect.sizeDelta.x, newHeight);
-            partTwoRect.sizeDelta = new Vector2(partTwoRect.sizeDelta.x, newHeight);
+            imageRect.sizeDelta = new Vector2(originalImageWidth, newHeight);
+            partTwoRect.sizeDelta = new Vector2(originalPartTwoWidth, newHeight);
+            
+            // 保持原始的水平位置
+            imageRect.anchoredPosition = new Vector2(originalImageX, imageRect.anchoredPosition.y);
+            partTwoRect.anchoredPosition = new Vector2(originalPartTwoX, partTwoRect.anchoredPosition.y);
         }
     }
 }
