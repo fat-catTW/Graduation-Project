@@ -231,15 +231,25 @@ public class VRLessonManager : MonoBehaviour
         
         // 獲取 Image 的 RectTransform
         RectTransform imageRect = reviewText.transform.parent.GetComponent<RectTransform>();
-        if (imageRect != null)
+        // 獲取 PartTwo 的 RectTransform
+        RectTransform partTwoRect = imageRect.transform.parent.GetComponent<RectTransform>();
+
+        if (imageRect != null && partTwoRect != null)
         {
             // 設置 Image 的錨點，讓它能夠往下延伸
             imageRect.anchorMin = new Vector2(0.5f, 1);
             imageRect.anchorMax = new Vector2(0.5f, 1);
             imageRect.pivot = new Vector2(0.5f, 1);
             
-            // 設置 Image 的高度，加上一些邊距
-            imageRect.sizeDelta = new Vector2(imageRect.sizeDelta.x, textHeight + 40f);
+            // 設置 PartTwo 的錨點
+            partTwoRect.anchorMin = new Vector2(0.5f, 1);
+            partTwoRect.anchorMax = new Vector2(0.5f, 1);
+            partTwoRect.pivot = new Vector2(0.5f, 1);
+            
+            // 設置 Image 和 PartTwo 的高度，加上一些邊距
+            float newHeight = textHeight + 40f;
+            imageRect.sizeDelta = new Vector2(imageRect.sizeDelta.x, newHeight);
+            partTwoRect.sizeDelta = new Vector2(partTwoRect.sizeDelta.x, newHeight);
         }
     }
 }
