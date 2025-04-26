@@ -106,3 +106,18 @@ Database Name（資料庫）	railway
 很重要收藏區的prefab也要加CourseData.cs 但裡面不用填東西 然後go button的Onclick 要先把prefab本身加進去 然後選擇 CourseData.OpenCourseDetail 喔對了 toggle的部分要反邏輯
 CoursePage_1 CoursePage_2 CoursePage_3 要改名沒錯 然後BackButton 要綁PresetCoursesManager 方法要綁 ReturnToCourseList
 喔還有PresetCoursesManager要放全域
+
+4/26 VR端老師連接
+已經好久沒紀錄了 這次更新了很多內容 總算應該是完成了
+要更新的程式碼有：AudioManager、ChatWithProfessor、TeacherManager、PersistentDataManager、VRLogin、ExitPanelController
+
+首先，要改PersistenDataManager、VRLogin，讓teacher_card_id也要可以從資料庫取得
+其次要注意，Audiomanager直接掛載到Enviroment上就好，然後在全域加上TeacherManager，把模型都拉進去，按照：Card的順序拖入進去，然後Voice_id也直接寫入
+最後，ExitPanelController也要修改，讓他可以把is_vr_ready改成0
+
+gU2KtIu9OZWy3KqiqNj6 雅典娜
+4VZIsMPtgggwNg7OXbPY 聖派翠克 
+BZLsSg9fDGFYEEJQ4JU3 哥布林 
+BrbEfHMQu0fyclQR7lfh 海盜 
+fQj4gJSexpu8RDE2Ii5m 盛惟老師
+BrbEfHMQu0fyclQR7lfh 聖誕老人
