@@ -39,19 +39,12 @@ public class TeacherManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("TeacherManager Start 被調用");
         // 初始化时隱藏所有老師和麋鹿
         HideAllTeachers();
         
         // 从 PersistentDataManager 获取当前老师 ID
         int teacherId = PersistentDataManager.Instance.TeacherCardId;
         ShowTeacher(teacherId);
-
-        // 列出所有老師的語音 ID
-        for (int i = 0; i < teacherModels.Length; i++)
-        {
-            Debug.Log($"老師 {i+1}: {teacherModels[i].teacherName}, Voice ID: {teacherModels[i].voiceId}");
-        }
     }
 
     private void HideAllTeachers()
@@ -67,14 +60,13 @@ public class TeacherManager : MonoBehaviour
 
     public void ShowTeacher(int teacherId)
     {
-        Debug.Log($"準備切換到老師 ID: {teacherId}");
         // 先隱藏所有老師
         HideAllTeachers();
 
         // 确保 teacherId 在有效范围内
-        if (teacherId < 1 || teacherId > teacherModels.Length)
+        if (teacherId <= 0 || teacherId > teacherModels.Length)
         {
-            Debug.LogError($"無效的老師 ID: {teacherId}");
+            Debug.LogError($"無效的老師ID: {teacherId}");
             return;
         }
 
@@ -87,7 +79,7 @@ public class TeacherManager : MonoBehaviour
         {
             teacher.teacherObject.SetActive(true);
             currentTeacher = teacher.teacherObject;
-            Debug.Log($"切換到老師: {teacher.teacherName}, Voice ID: {teacher.voiceId}");
+            Debug.Log($"顯示老師: {teacher.teacherName}");
 
             // 如果是聖誕老公公，同時顯示麋鹿
             if (teacherId == SANTA_TEACHER_ID && teacher.companionObject != null)
@@ -106,13 +98,12 @@ public class TeacherManager : MonoBehaviour
     // 獲取當前老師的 voice ID
     public string GetCurrentVoiceId()
     {
-        if (currentTeacherModel != null)
+        if (currentTeacherModel != null && !string.IsNullOrEmpty(currentTeacherModel.voiceId))
         {
-            Debug.Log($"獲取當前老師語音 ID: {currentTeacherModel.voiceId}");
             return currentTeacherModel.voiceId;
         }
-        Debug.LogWarning("當前沒有選中的老師，使用默認語音 ID");
-        return "default";
+        Debug.LogWarning("當前沒有設置voice ID，使用默認值");
+        return "default";  // 如果沒有設置，返回默認值
     }
 
     // 可以添加其他方法来控制老师的动画、交互等
