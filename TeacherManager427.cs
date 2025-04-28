@@ -107,7 +107,4 @@ public class TeacherManager : MonoBehaviour
     }
 
     // 可以添加其他方法来控制老师的动画、交互等
-
-    Debug.Log($"當前老師 ID: {teacher_card_id}");
-    Debug.Log($"對應的語音 ID: {currentVoice}");
 } 
