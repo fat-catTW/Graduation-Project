@@ -121,3 +121,159 @@ BZLsSg9fDGFYEEJQ4JU3 哥布林
 BrbEfHMQu0fyclQR7lfh 海盜 
 fQj4gJSexpu8RDE2Ii5m 盛惟老師
 BrbEfHMQu0fyclQR7lfh 聖誕老人
+
+子物件名稱: ChapterTitleYellow(Clone)
+UnityEngine.Debug:Log (object)
+chatWithProfessor:HandleChaptersFetched (Chapter[]) (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:339)
+fetchRenderToC/<FetchChapters>d__7:MoveNext () (at Assets/Scripts/OneToOneChat/fetchRenderToC.cs:54)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+開始錄音... 使用設備: Microphone (C-Media(R) Audio)
+UnityEngine.Debug:Log (object)
+AudioManager:StartRecording () (at Assets/Scripts/AudioManager.cs:77)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:52)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+音頻設置 - 採樣率: 44100Hz, 聲道數: 1, 最大長度: 60秒
+UnityEngine.Debug:Log (object)
+AudioManager:StartRecording () (at Assets/Scripts/AudioManager.cs:78)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:52)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+錄音結束
+UnityEngine.Debug:Log (object)
+AudioManager:StopRecording () (at Assets/Scripts/AudioManager.cs:92)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:59)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+錄音停止，顯示 loading 動畫
+UnityEngine.Debug:Log (object)
+chatWithProfessor:HandleRecordingStopped () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:438)
+AudioManager:StopRecording () (at Assets/Scripts/AudioManager.cs:95)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:59)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+錄音長度: 60秒
+UnityEngine.Debug:Log (object)
+AudioManager:StopRecording () (at Assets/Scripts/AudioManager.cs:100)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:59)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+生成的 WAV 檔案大小: 5292044 bytes
+UnityEngine.Debug:Log (object)
+AudioManager:AudioToWav (UnityEngine.AudioClip) (at Assets/Scripts/AudioManager.cs:281)
+AudioManager/<ProcessAudio>d__16:MoveNext () (at Assets/Scripts/AudioManager.cs:119)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator)
+AudioManager:StopRecording () (at Assets/Scripts/AudioManager.cs:101)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:59)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+音頻參數 - 採樣率: 44100Hz, 聲道數: 1, 位元深度: 16-bit
+UnityEngine.Debug:Log (object)
+AudioManager:AudioToWav (UnityEngine.AudioClip) (at Assets/Scripts/AudioManager.cs:282)
+AudioManager/<ProcessAudio>d__16:MoveNext () (at Assets/Scripts/AudioManager.cs:119)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator)
+AudioManager:StopRecording () (at Assets/Scripts/AudioManager.cs:101)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:59)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+準備發送音頻數據，大小: 5292044 bytes
+UnityEngine.Debug:Log (object)
+AudioManager/<ProcessAudio>d__16:MoveNext () (at Assets/Scripts/AudioManager.cs:126)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator)
+AudioManager:StopRecording () (at Assets/Scripts/AudioManager.cs:101)
+AudioRecordUI:OnRecordButtonClick () (at Assets/Scripts/AudioRecordUI.cs:59)
+UnityEngine.XR.Interaction.Toolkit.UI.UIInputModule:Update () (at ./Library/PackageCache/com.unity.xr.interaction.toolkit/Runtime/UI/UIInputModule.cs:158)
+
+原始轉寫文本: 在這個實驗中，我們使用了 NaCl 溶液來測試樣本的導電性。
+UnityEngine.Debug:Log (object)
+AudioManager/<ProcessAudio>d__16:MoveNext () (at Assets/Scripts/AudioManager.cs:140)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+處理後的轉寫文本: 在這個實驗中，我們使用了 NaCl 溶液來測試樣本的導電性。
+UnityEngine.Debug:Log (object)
+AudioManager/<ProcessAudio>d__16:MoveNext () (at Assets/Scripts/AudioManager.cs:144)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+這是使用者的回答:在這個實驗中，我們使用了 NaCl 溶液來測試樣本的導電性。 
+1貓與人的關係2貓的習性特徵3常見貓品種介紹4飼養貓的責任5結束
+
+        目錄總共有5個章節
+        這是上傳內容的目錄。
+        請完全遵守Instruction進行 Phrase2，依序每個目錄要問兩個問題。
+
+        回覆請用一定要用JSON的格式 不然扁你
+        Json要包含兩個Field 第一個是 progress 用數字標明目前輔導到哪個目錄主題 ， 第二個是reply也就是你的回覆。
+        範例Json:
+        {
+            "action": "one_to_one",
+            "progress": 2,
+            "reply": "你的回答可以更精確......"
+        }
+
+        回覆請用一定要用JSON的格式 不然扁你
+        每個reply請不要超出100字。
+        請注意使用者的回答，如果回答錯誤就請他修正。 如果回答正確就給予鼓勵並前往下一題。
+        目前目錄問題都完成了就進下一個目錄
+        當進行到最後的章節"結束"就請在JSON的 reply 中只回 "GoodJobYouAreGoodToGo"
+        注意是要進行到最後的章節"結束後"才在reply只回  "GoodJobYouAreGoodToGo" 不要有其他內容 不然扁你
+        
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:168)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator)
+AudioManager/<ProcessAudio>d__16:MoveNext () (at Assets/Scripts/AudioManager.cs:152)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+清理後的 JSON: {  "action": "one_to_one",  "progress": 1,  "reply": "很遺憾，你提到的實驗與'貓與人的關係'主題不相關。思考一下如何描述貓如何影響人類的生活或者人類對貓的情感連結。"}
+UnityEngine.Debug:Log (object)
+chatWithProfessor:CleanJsonString (string) (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:431)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:185)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+原始 JSON 字符串: {  "action": "one_to_one",  "progress": 1,  "reply": "很遺憾，你提到的實驗與'貓與人的關係'主題不相關。思考一下如何描述貓如何影響人類的生活或者人類對貓的情感連結。"}
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:186)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+老師回覆內容: 很遺憾，你提到的實驗與'貓與人的關係'主題不相關。思考一下如何描述貓如何影響人類的生活或者人類對貓的情感連結。
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:193)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+目前進度: 1
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:194)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+準備發送TTS請求: {"text":"很遺憾，你提到的實驗與'貓與人的關係'主題不相關。思考一下如何描述貓如何影響人類的生活或者人類對貓的情感連結。","voice_id":"default"}
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<TextToSpeech>d__30:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:254)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:197)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+Change Progress to 1
+UnityEngine.Debug:Log (object)
+chatWithProfessor:progressUpdate (int) (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:373)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:199)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+Updating Progress to DB...
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<sendProgressUpdate>d__34:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:392)
+UnityEngine.MonoBehaviour:StartCoroutine (System.Collections.IEnumerator)
+chatWithProfessor:progressUpdate (int) (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:386)
+chatWithProfessor/<SendMessage>d__29:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:199)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+音頻接收成功，長度: 11.859秒
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<TextToSpeech>d__30:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:271)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+Progress updated successfully!
+UnityEngine.Debug:Log (object)
+chatWithProfessor/<sendProgressUpdate>d__34:MoveNext () (at Assets/Scripts/OneToOneChat/chatWithProfessor.cs:410)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+
