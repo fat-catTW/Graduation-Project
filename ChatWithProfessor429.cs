@@ -44,11 +44,9 @@ public class chatWithProfessor : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("[chatWithProfessor] Start 開始");
         if (fetcher != null)
         {
             fetcher.OnChaptersFetched += HandleChaptersFetched;
-            Debug.Log("[chatWithProfessor] 訂閱 fetcher.OnChaptersFetched 事件");
         }
 
         // 初始化語音設置
@@ -58,7 +56,6 @@ public class chatWithProfessor : MonoBehaviour
             if (audioSource == null)
             {
                 audioSource = gameObject.AddComponent<AudioSource>();
-                Debug.Log("[chatWithProfessor] 創建新的 AudioSource 組件");
             }
             audioSource.playOnAwake = false;
             audioSource.spatialBlend = 0f;
@@ -70,7 +67,6 @@ public class chatWithProfessor : MonoBehaviour
         if (audioManager != null)
         {
             audioManager.OnRecordingStopped += HandleRecordingStopped;
-            Debug.Log("[chatWithProfessor] 訂閱 audioManager.OnRecordingStopped 事件");
         }
         else
         {
@@ -91,7 +87,6 @@ public class chatWithProfessor : MonoBehaviour
             
             // 訂閱 TeacherManager 的事件
             TeacherManager.Instance.OnTeacherChanged += UpdateVoiceId;
-            Debug.Log("[chatWithProfessor] 訂閱 TeacherManager.OnTeacherChanged 事件");
         }
         else
         {
@@ -111,24 +106,12 @@ public class chatWithProfessor : MonoBehaviour
             CompletedChapters = PersistentDataManager.Instance.CompletedChapters;
             TotalChapters = PersistentDataManager.Instance.TotalChapters;
 
-            Debug.Log($"[chatWithProfessor] 從 PersistentDataManager 獲取資料:");
-            Debug.Log($"[chatWithProfessor] - UserId: {UserId}");
-            Debug.Log($"[chatWithProfessor] - Username: {Username}");
-            Debug.Log($"[chatWithProfessor] - CurrentCourseId: {CurrentCourseId}");
-            Debug.Log($"[chatWithProfessor] - CurrentCourseName: {CurrentCourseName}");
-            Debug.Log($"[chatWithProfessor] - CurrentStage: {CurrentStage}");
-            Debug.Log($"[chatWithProfessor] - OneToOneProgress: {OneToOneProgress}");
-            Debug.Log($"[chatWithProfessor] - ClassroomProgress: {ClassroomProgress}");
-            Debug.Log($"[chatWithProfessor] - CompletedChapters: {CompletedChapters}");
-            Debug.Log($"[chatWithProfessor] - TotalChapters: {TotalChapters}");
-
             StartCoroutine(getChatGPTIDs());
         }
         else
         {
             Debug.LogError("[chatWithProfessor] PersistentDataManager.Instance is null! 確保 PersistentDataManager 存在於場景中。");
         }
-        Debug.Log("[chatWithProfessor] Start 結束");
     }
 
     void Update()
@@ -256,10 +239,6 @@ public class chatWithProfessor : MonoBehaviour
 
     private IEnumerator TextToSpeech(string text)
     {
-        Debug.Log("[chatWithProfessor] TextToSpeech 開始");
-        Debug.Log($"[chatWithProfessor] 要轉換的文字: {text}");
-        Debug.Log($"[chatWithProfessor] 使用的 voiceId: {currentVoice}");
-
         if (audioSource == null)
         {
             Debug.LogError("[chatWithProfessor] AudioSource is not assigned!");
@@ -314,7 +293,6 @@ public class chatWithProfessor : MonoBehaviour
             else
             {
                 Debug.LogError($"[chatWithProfessor] TTS請求失敗: {request.error}");
-                Debug.LogError($"[chatWithProfessor] 錯誤詳情: {request.downloadHandler.text}");
                 if (loadingAnimation != null)
                 {
                     loadingAnimation.SetActive(false);
@@ -324,7 +302,6 @@ public class chatWithProfessor : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.LogError($"[chatWithProfessor] TextToSpeech 錯誤: {e.Message}");
-            Debug.LogError($"[chatWithProfessor] 錯誤堆疊: {e.StackTrace}");
             if (loadingAnimation != null)
             {
                 loadingAnimation.SetActive(false);
@@ -334,7 +311,6 @@ public class chatWithProfessor : MonoBehaviour
         {
             request.Dispose();
         }
-        Debug.Log("[chatWithProfessor] TextToSpeech 結束");
     }
 
     void HandleChaptersFetched(Chapter[] chapters)
@@ -479,13 +455,11 @@ public class chatWithProfessor : MonoBehaviour
     // 更新 voice ID 的方法
     private void UpdateVoiceId()
     {
-        Debug.Log("[chatWithProfessor] UpdateVoiceId 被調用");
         if (TeacherManager.Instance != null)
         {
             string newVoiceId = TeacherManager.Instance.GetCurrentVoiceId();
-            Debug.Log($"[chatWithProfessor] 從 TeacherManager 獲取到的 voiceId: {newVoiceId}");
             currentVoice = newVoiceId;
-            Debug.Log($"[chatWithProfessor] 更新後的 currentVoice: {currentVoice}");
+            Debug.Log($"[chatWithProfessor] 更新老師語音ID: {currentVoice}");
         }
         else
         {
