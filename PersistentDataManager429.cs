@@ -24,19 +24,15 @@ public class PersistentDataManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("[PersistentDataManager] Awake 開始");
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);  // 跨場景保留
-            Debug.Log("[PersistentDataManager] 創建新實例");
         }
         else
         {
-            Debug.Log("[PersistentDataManager] 實例已存在，銷毀當前實例");
             Destroy(gameObject);
         }
-        Debug.Log("[PersistentDataManager] Awake 結束");
     }
 
     /// <summary>
@@ -44,12 +40,8 @@ public class PersistentDataManager : MonoBehaviour
     /// </summary>
     public void SetUserData(int userId, string username)
     {
-        Debug.Log("[PersistentDataManager] SetUserData 開始");
-        Debug.Log($"[PersistentDataManager] 設置 UserId: {userId}");
-        Debug.Log($"[PersistentDataManager] 設置 Username: {username}");
         UserId = userId;
         Username = username;
-        Debug.Log("[PersistentDataManager] SetUserData 結束");
     }
 
     /// <summary>
@@ -57,22 +49,12 @@ public class PersistentDataManager : MonoBehaviour
     /// </summary>
     public void SetCourseData(int courseId, string courseName, string stage, float oneToOneProgress, float classroomProgress, int teacherCardId)
     {
-        Debug.Log("[PersistentDataManager] SetCourseData 開始");
-        Debug.Log($"[PersistentDataManager] 設置 CourseId: {courseId}");
-        Debug.Log($"[PersistentDataManager] 設置 CourseName: {courseName}");
-        Debug.Log($"[PersistentDataManager] 設置 Stage: {stage}");
-        Debug.Log($"[PersistentDataManager] 設置 OneToOneProgress: {oneToOneProgress}");
-        Debug.Log($"[PersistentDataManager] 設置 ClassroomProgress: {classroomProgress}");
-        Debug.Log($"[PersistentDataManager] 設置 TeacherCardId: {teacherCardId}");
-        
         CurrentCourseId = courseId;
         CurrentCourseName = courseName;
         CurrentStage = stage;
         OneToOneProgress = oneToOneProgress;
         ClassroomProgress = classroomProgress;
         TeacherCardId = teacherCardId;
-        
-        Debug.Log($"[PersistentDataManager] 設置後的 TeacherCardId: {TeacherCardId}");
-        Debug.Log("[PersistentDataManager] SetCourseData 結束");
+        Debug.Log($"[PersistentDataManager] 設置 TeacherCardId: {TeacherCardId}");
     }
 }
