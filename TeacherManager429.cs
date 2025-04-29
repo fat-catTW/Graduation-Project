@@ -31,33 +31,18 @@ public class TeacherManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("[TeacherManager] Awake 開始");
         if (Instance == null)
         {
             Instance = this;
-            Debug.Log("[TeacherManager] 創建新實例");
         }
         else
         {
-            Debug.Log("[TeacherManager] 實例已存在，銷毀當前實例");
             Destroy(gameObject);
         }
-        Debug.Log("[TeacherManager] Awake 結束");
     }
 
     void Start()
     {
-        Debug.Log("[TeacherManager] Start 開始");
-        Debug.Log($"[TeacherManager] teacherModels 長度: {teacherModels.Length}");
-        
-        // 檢查 teacherModels 中的設置
-        for (int i = 0; i < teacherModels.Length; i++)
-        {
-            Debug.Log($"[TeacherManager] 老師 {i + 1}: {teacherModels[i].teacherName}");
-            Debug.Log($"[TeacherManager] - teacherObject: {(teacherModels[i].teacherObject == null ? "null" : teacherModels[i].teacherObject.name)}");
-            Debug.Log($"[TeacherManager] - voiceId: {teacherModels[i].voiceId}");
-        }
-
         // 初始化时隱藏所有老師和麋鹿
         HideAllTeachers();
 
@@ -80,7 +65,6 @@ public class TeacherManager : MonoBehaviour
         {
             Debug.LogError("[TeacherManager] PersistentDataManager.Instance 為 null！");
         }
-        Debug.Log("[TeacherManager] Start 結束");
     }
 
     private void HideAllTeachers()
@@ -96,9 +80,6 @@ public class TeacherManager : MonoBehaviour
 
     public void ShowTeacher(int teacherId)
     {
-        Debug.Log($"[TeacherManager] ShowTeacher 開始，teacherId: {teacherId}");
-        Debug.Log($"[TeacherManager] teacherModels 長度: {teacherModels.Length}");
-
         // 先隱藏所有老師
         HideAllTeachers();
 
@@ -111,13 +92,7 @@ public class TeacherManager : MonoBehaviour
 
         // 获取对应的老师（数组索引比 ID 小 1）
         TeacherModel teacher = teacherModels[teacherId - 1];
-        Debug.Log($"[TeacherManager] 獲取到的老師模型: {teacher.teacherName}");
-        Debug.Log($"[TeacherManager] - teacherObject: {(teacher.teacherObject == null ? "null" : teacher.teacherObject.name)}");
-        Debug.Log($"[TeacherManager] - voiceId: {teacher.voiceId}");
-        
         currentTeacherModel = teacher; // 保存當前老師模型數據
-        Debug.Log($"[TeacherManager] 設置 currentTeacherModel: {currentTeacherModel.teacherName}");
-        Debug.Log($"[TeacherManager] - voiceId: {currentTeacherModel.voiceId}");
 
         // 顯示選中的老師
         if (teacher.teacherObject != null)
@@ -136,24 +111,18 @@ public class TeacherManager : MonoBehaviour
 
             // 觸發老師變更事件
             OnTeacherChanged?.Invoke();
-            Debug.Log("[TeacherManager] 觸發 OnTeacherChanged 事件");
         }
         else
         {
             Debug.LogError($"[TeacherManager] 老師 {teacher.teacherName} 的物件未設置！");
         }
-        Debug.Log("[TeacherManager] ShowTeacher 結束");
     }
 
     // 獲取當前老師的 voice ID
     public string GetCurrentVoiceId()
     {
-        Debug.Log("[TeacherManager] GetCurrentVoiceId 開始");
-        Debug.Log($"[TeacherManager] currentTeacherModel: {(currentTeacherModel == null ? "null" : currentTeacherModel.teacherName)}");
-        
         if (currentTeacherModel != null && !string.IsNullOrEmpty(currentTeacherModel.voiceId))
         {
-            Debug.Log($"[TeacherManager] 返回 voiceId: {currentTeacherModel.voiceId}");
             return currentTeacherModel.voiceId;
         }
         Debug.LogWarning("[TeacherManager] 當前沒有設置voice ID，使用默認值");
