@@ -57,12 +57,16 @@ public class SettlementPanelController : MonoBehaviour
 
             if (finishRequest.result != UnityWebRequest.Result.Success)
             {
+                string errorResponse = finishRequest.downloadHandler.text;
                 Debug.LogError($"❌ 強制完成章節失敗: {finishRequest.error}");
+                Debug.LogError($"發送的資料: {jsonData}");
+                Debug.LogError($"伺服器回應: {errorResponse}");
                 yield break;
             }
             else
             {
-                Debug.Log("✅ 章節強制完成成功");
+                string response = finishRequest.downloadHandler.text;
+                Debug.Log($"✅ 章節強制完成成功，伺服器回應: {response}");
             }
         }
 
@@ -107,6 +111,7 @@ public class SettlementPanelController : MonoBehaviour
                         {
                             Debug.Log("✅ 課程進度和 VR 狀態更新成功");
                         }
+
                     }
                 }
             }
